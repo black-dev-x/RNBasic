@@ -12,7 +12,7 @@ export default function App() {
 
   const addGoalHandler = () => {
     setGoal('');
-    setGoals((goals) => [...goals, goal]);
+    setGoals((goals) => [...goals, {text: goal, id: Math.random().toString()}]);
   };
 
   return (
@@ -22,10 +22,10 @@ export default function App() {
         <Button onPress={addGoalHandler} title='Add Goal'></Button>
       </View>
       <View style={styles.goalsContainer}>
-        <FlatList data={goals} renderItem={
+        <FlatList data={goals} keyExtractor={(item, index) => item.text + index} renderItem={
           ({item}) => (
             <View style={styles.goalBox}>
-              <Text style={styles.goalText}>{item}</Text>
+              <Text style={styles.goalText}>{item.text}</Text>
             </View>
           )
         }>
