@@ -10,6 +10,7 @@ export default function App() {
 
   const addGoalHandler = (goal) => {
     setGoals((goals) => [...goals, {text: goal, id: Math.random().toString()}]);
+    setModalVisible(false);
   };
 
   const deleteGoal = (goal) => {
@@ -18,8 +19,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {!modalVisible && <Button title="Add New Goal" color="#5e0acc" onPress={setModalVisible.bind(this, true)}/>}
-      <GoalInput visible={modalVisible} addGoalHandler={addGoalHandler} />
+      {!modalVisible && <Button title="Add New Goal" color="#5e0acc" onPress={() => setModalVisible(true)}/>}
+      <GoalInput visible={modalVisible} addGoalHandler={addGoalHandler} cancel={() => setModalVisible(false)}/>
       <View style={styles.goalsContainer}>
         <FlatList data={goals} keyExtractor={(item) => item.id} renderItem={({item}) => <GoalItem item={item} action={deleteGoal}/>}></FlatList>
       </View>
