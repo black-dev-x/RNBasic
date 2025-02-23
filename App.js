@@ -18,14 +18,16 @@ export default function App() {
   }
 
   return (
+    <>
+    <StatusBar style='light'/>
     <View style={styles.container}>
       {!modalVisible && <Button title="Add New Goal" color="#5e0acc" onPress={() => setModalVisible(true)}/>}
       <GoalInput visible={modalVisible} addGoalHandler={addGoalHandler} cancel={() => setModalVisible(false)}/>
       <View style={styles.goalsContainer}>
         <FlatList data={goals} keyExtractor={(item) => item.id} renderItem={({item}) => <GoalItem item={item} action={deleteGoal}/>}></FlatList>
       </View>
-      <StatusBar style='auto' />
     </View>
+    </>
   );
 }
 
